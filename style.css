@@ -1,0 +1,106 @@
+/* Genel stil */
+body {
+    justify-content: center;
+align-items: center;
+padding: 10px;
+background: linear-gradient(135deg,#71b7e6,#9b59b6);
+}
+
+/* Başlıklar */
+h1, h2 {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Form stilleri */
+form {
+    background-color: azure;
+    padding: 20px;
+    border: 1px solid blue;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow:  10px 10px rgba(2, 47, 107, 0.2);
+}
+
+/* Input ve textarea */
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+/* Buton stilleri */
+button {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Görev listesi */
+#taskList {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#taskList li {
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Sil butonu */
+#taskList li button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: #e74c3c;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+#taskList li button:hover {
+    background-color: #c0392b;
+}
+
+/* Kategori renkleri */
+.school {
+    background-color: #d0e7ff; /* Açık mavi */
+    border-color: #a3c8ff;
+}
+
+.work {
+    background-color: #d4f5d4; /* Açık yeşil */
+    border-color: #a8e0a8;
+}
+
+.personal {
+    background-color: #fff9c4; /* Açık sarı */
+    border-color: #fff59d;
+}
