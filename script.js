@@ -1,65 +1,75 @@
 const form = document.getElementById("todoForm");
 const taskList = document.getElementById("taskList");
+const API_URL = "http://localhost:5284/api/todo"; 
 
-// LocalStorage'dan görevleri yükle
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-tasks.forEach(task => addTaskToDOM(task));
+// Sayfa açıldığında verileri getir
+async function loadTasks() {
+    try {
+        const response = await fetch(API_URL);
+        const tasks = await response.json();
+        taskList.innerHTML = ""; 
+        tasks.forEach(task => addTaskToDOM(task));
+    } catch (err) {
+        console.error("Yükleme hatası:", err);
+    }
+}
 
-// Form submit işlemi
-form.addEventListener("submit", function(e) {
+// Yeni görev ekle
+form.addEventListener("submit", async function(e) {
     e.preventDefault();
 
     const task = {
         title: document.getElementById("title").value,
         description: document.getElementById("description").value,
-        date: document.getElementById("date").value,
+        dueDate: document.getElementById("date").value,
         priority: document.getElementById("priority").value,
-        category: document.getElementById("category").value,
-        time: document.getElementById("time").value,
-        notification: document.getElementById("notification").checked,
-        done: false
+        categoryId: document.getElementById("category").value,
+        reminderTime: document.getElementById("time").value,
+        isNotificationActive: document.getElementById("notification").checked,
+        statusId: "open"
     };
 
-    tasks.push(task);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(task)
+        });
 
-    addTaskToDOM(task);
-    form.reset();
+        if (response.ok) {
+            const newTask = await response.json();
+            addTaskToDOM(newTask);
+            form.reset();
+        } else {
+            console.error("Backend hata verdi:", await response.text());
+        }
+    } catch (err) {
+        console.error("İstek hatası:", err);
+    }
 });
 
-// Görevi DOM'a ekleme
 function addTaskToDOM(task) {
     const li = document.createElement("li");
+    const categoryClass = task.categoryId === "Okul" ? "school" : (task.categoryId === "İş" ? "work" : "personal");
+    li.className = categoryClass;
 
     li.innerHTML = `
-        <input type="checkbox" class="check" ${task.done ? "checked" : ""}>
-        <strong>${task.title}</strong><br>
-        Açıklama: ${task.description}<br>
-        Tarih: ${task.date}<br>
-        Saat: ${task.time}<br>
-        Öncelik: ${task.priority}<br>
-        Kategori: ${task.category}
+        <strong>${task.title}</strong> - <small>${task.priority}</small><br>
+        <p>${task.description || ""}</p>
+        <small>${task.dueDate} ${task.reminderTime || ""}</small>
         <button class="delete">Sil</button>
     `;
 
-    // Checkbox tamamlandı işlemi
-    const checkbox = li.querySelector(".check");
-    checkbox.addEventListener("change", function() {
-        task.done = this.checked;
-        if (task.done) li.classList.add("done");
-        else li.classList.remove("done");
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+    li.querySelector(".delete").addEventListener("click", async function() {
+        try {
+            const res = await fetch(`${API_URL}/${task.id}`, { method: "DELETE" });
+            if (res.ok) li.remove();
+        } catch (err) {
+            console.error("Silme hatası:", err);
+        }
     });
-
-    // Silme butonu
-    const deleteBtn = li.querySelector(".delete");
-    deleteBtn.addEventListener("click", function() {
-        taskList.removeChild(li);
-        tasks = tasks.filter(t => t !== task);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    });
-
-    if(task.done) li.classList.add("done");
 
     taskList.appendChild(li);
 }
+
+loadTasks();

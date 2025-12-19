@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -11,43 +11,42 @@
 <h1>Günlük To-Do List</h1>
 
 <!-- GÖREV EKLEME FORMU -->
-
 <form id="todoForm">
 
-    <h2>Yeni Görev Ekle</h2>
+    <h2>Yeni Görev Ekle</h2>
 
-    <label>Görev Başlığı:</label><br>
-    <input type="text" id="title" placeholder="Örn: Algoritma çalış" required><br><br>
+    <label>Görev Başlığı:</label><br>
+    <input type="text" id="title" placeholder="Örn: Algoritma çalış" required><br><br>
 
-    <label>Açıklama:</label><br>
-    <textarea id="description" placeholder="Görev detayları"></textarea><br><br>
+    <label>Açıklama:</label><br>
+    <textarea id="description" placeholder="Görev detayları"></textarea><br><br>
 
-    <label>Tarih:</label><br>
-    <input type="date" id="date"><br><br>
+    <label>Tarih:</label><br>
+    <input type="date" id="date"><br><br>
 
-    <label>Öncelik:</label><br>
-    <select id="priority">
-        <option>Düşük</option>
-        <option>Orta</option>
-        <option>Yüksek</option>
-    </select><br><br>
+    <label>Öncelik:</label><br>
+    <select id="priority">
+        <option>Düşük</option>
+        <option>Orta</option>
+        <option>Yüksek</option>
+    </select><br><br>
 
-    <label>Kategori / Proje:</label><br>
-    <select id="category">
-        <option>Okul</option>
-        <option>İş</option>
-        <option>Kişisel</option>
-    </select><br><br>
+    <label>Kategori / Proje:</label><br>
+    <select id="category">
+        <option>Okul</option>
+        <option>İş</option>
+        <option>Kişisel</option>
+    </select><br><br>
 
-    <label>Hatırlatma Saati:</label><br>
-    <input type="time" id="time"><br><br>
+    <label>Hatırlatma Saati:</label><br>
+    <input type="time" id="time"><br><br>
 
-    <label>
-        <input type="checkbox" id="notification">
-        Bildirim Açık
-    </label><br><br>
+    <label>
+        <input type="checkbox" id="notification">
+        Bildirim Açık
+    </label><br><br>
 
-    <button type="submit">Görevi Ekle</button>
+    <button type="submit">Görevi Ekle</button>
 
 </form>
 
@@ -56,7 +55,7 @@
 <!-- GÖREV LİSTESİ -->
 <h2>Günlük Görevler</h2>
 <ul id="taskList">
-    <!-- backend ile görevler buraya eklenecek -->
+    <!-- backend ile görevler buraya eklenecek -->
 </ul>
 <script src="script.js"></script>
 </body>
